@@ -1,0 +1,26 @@
+# Ignorar archivos de configuración sensible
+.env
+.env.local
+.env.development
+.env.production
+
+# Ignorar carpetas de dependencias
+node_modules/
+  
+# Ignorar archivos de logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar cachés de editor de código
+.vscode/
+.idea/
+
+# Ignorar archivos de compilación
+dist/
+build/
+
+# Ignorar Docker archivos generados
+docker-compose.override.yml

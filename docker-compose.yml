@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build: .  # Construye la imagen de la API desde Dockerfile
+    ports:
+      - "3000:3000"  # Expone el puerto 3000
+    environment:
+      - DB_HOST=db  # Se conecta al contenedor de SQL Server (NO localhost)
+      - DB_PORT=1433
+      - DB_NAME=BDD_PoliMusic_Song
+      - DB_USER=usr_polimusic_gr2
+      - DB_PASS=Politecnica1
+      - DB_DIALECT=mssql
+    depends_on:
+      - db  # La API espera a que la BD esté lista
+    networks:
+      - mynetwork
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql-server2022-deber02
+    ports:
+      - "14334:1433"  # Expone la BD en la máquina para acceso externo
+    environment:
+      SA_PASSWORD: "Politecnica1"
+      ACCEPT_EULA: "Y"
+    networks:
+      - mynetwork
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+networks:
+  mynetwork:
+    driver: bridge
+
+volumes:
+  sqlserver_data:
